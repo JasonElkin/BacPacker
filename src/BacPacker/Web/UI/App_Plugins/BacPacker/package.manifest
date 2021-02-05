@@ -1,0 +1,11 @@
+﻿{
+  "dashboards": [
+    {
+      "alias": "bacPacker",
+      "name": "BacPacker",
+      "view": "/App_Plugins/BacPacker/dashboard.html",
+      "sections": [ "settings" ],
+      "weight": 50
+    }
+  ]
+}

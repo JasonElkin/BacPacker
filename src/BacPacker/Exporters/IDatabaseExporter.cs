@@ -8,7 +8,12 @@ namespace BacPacker.Exporters
 {
     public interface IDatabaseExporter
     {
+        string Name { get; }
+
+        string Description { get; }
+
         bool SupportsDatabase(string databaseProviderName);
+
         Task<string> ExportDatabase(
             string fileName,
             IUmbracoDatabaseFactory umbracoDatabase, 

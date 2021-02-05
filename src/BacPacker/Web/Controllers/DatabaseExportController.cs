@@ -14,6 +14,12 @@ namespace BacPacker.Web.Controllers
         }
 
         [HttpGet]
+        public IHttpActionResult GetExporters()
+        {
+            return Ok(exportService.GetCompatibleExporters());
+        }
+
+        [HttpGet]
         public IHttpActionResult Export()
         {
             exportService.TriggerExport(new ProgressReporter());

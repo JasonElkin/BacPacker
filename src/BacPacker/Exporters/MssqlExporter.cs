@@ -27,6 +27,10 @@ namespace BacPacker.Exporters
             this.logger = logger;
         }
 
+        public string Name => "MSSQL";
+
+        public string Description => "Exports an MSSQL database to a .bacpac file.";
+
         public Task<string> ExportDatabase(
             string fileName,
             IUmbracoDatabaseFactory umbracoDatabase,

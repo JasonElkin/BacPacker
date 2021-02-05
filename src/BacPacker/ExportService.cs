@@ -1,7 +1,9 @@
 ﻿using BacPacker.Composing;
 using BacPacker.Exporters;
 using BacPacker.Messaging;
+using NPoco;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -19,12 +21,18 @@ namespace BacPacker
         private readonly IUmbracoDatabaseFactory databaseFactory;
         private readonly ILogger logger;
         private readonly CancellationTokenSource cts = new CancellationTokenSource();
+        private DatabaseType DbType => databaseFactory.SqlContext.DatabaseType;
 
         public ExportService(DatabaseExporterCollection databaseExporters, IUmbracoDatabaseFactory databaseFactory, ILogger logger)
         {
             this.exporters = databaseExporters;
             this.databaseFactory = databaseFactory;
             this.logger = logger;
+        }
+
+        internal IEnumerable<IDatabaseExporter> GetCompatibleExporters()
+        {
+            return exporters.GetCompatibleExporters(DbType);
         }
 
         public void CancelExports()
@@ -65,13 +73,11 @@ namespace BacPacker
         {
             logger.Debug(this.GetType(), "Database exporter has not been supplied, finding first compatible exporter.");
 
-            var dbType = databaseFactory.SqlContext.DatabaseType;
-
-            var exporter = exporters.GetCompatibleExporters(dbType).FirstOrDefault();
+            var exporter = exporters.GetCompatibleExporters(DbType).FirstOrDefault();
 
             if (exporter == null)
             {
-                throw new NoSupportedExporterException($"No IDatabaseExporter was found that supports a database provider \"{dbType.GetProviderName()}\"");
+                throw new NoSupportedExporterException($"No IDatabaseExporter was found that supports a database provider \"{DbType.GetProviderName()}\"");
             }
 
             return exporter;
