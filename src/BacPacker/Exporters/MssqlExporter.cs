@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading;
 using System.Threading.Tasks;
-using Umbraco.Core.Persistence;
 using Umbraco.Core.Logging;
+using Umbraco.Core.Persistence;
 
 namespace BacPacker.Exporters
 {
@@ -15,17 +15,19 @@ namespace BacPacker.Exporters
     {
         private readonly ILogger logger;
 
-        public IList<string> compatibleDatabases = new List<string>()
+        private readonly IList<DatabaseType> compatibleDatabases = new List<DatabaseType>()
         {
-            DatabaseType.SqlServer2005.GetProviderName(),
-            DatabaseType.SqlServer2008.GetProviderName(),
-            DatabaseType.SqlServer2012.GetProviderName(),
+            DatabaseType.SqlServer2005,
+            DatabaseType.SqlServer2008,
+            DatabaseType.SqlServer2012,
         };
 
         public MssqlExporter(ILogger logger)
         {
             this.logger = logger;
         }
+
+        public Guid Id => new Guid("ab424efe-a4b9-4bf0-8de0-60da0aedfcd6");
 
         public string Name => "MSSQL";
 
@@ -81,8 +83,8 @@ namespace BacPacker.Exporters
             return fileName;
         }
 
-        public bool SupportsDatabase(string databaseProviderName)
-            => compatibleDatabases.Contains(databaseProviderName);
+        public bool SupportsDatabase(DatabaseType databaseType)
+            => compatibleDatabases.Contains(databaseType);
 
     }
 }

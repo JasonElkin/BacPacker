@@ -1,8 +1,11 @@
 ﻿{
+  "javascript": [
+    "~/App_Plugins/BacPacker/bacPacker.controller.js",
+    "~/App_Plugins/BacPacker/bacPacker.resource.js"
+  ],
   "dashboards": [
     {
       "alias": "bacPacker",
-      "name": "BacPacker",
       "view": "/App_Plugins/BacPacker/dashboard.html",
       "sections": [ "settings" ],
       "weight": 50

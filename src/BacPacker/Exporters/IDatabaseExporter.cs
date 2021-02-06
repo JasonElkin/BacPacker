@@ -1,4 +1,5 @@
 ﻿using BacPacker.Messaging;
+using NPoco;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,11 +9,13 @@ namespace BacPacker.Exporters
 {
     public interface IDatabaseExporter
     {
+        Guid  Id { get; }
+
         string Name { get; }
 
         string Description { get; }
 
-        bool SupportsDatabase(string databaseProviderName);
+        bool SupportsDatabase(DatabaseType databaseType);
 
         Task<string> ExportDatabase(
             string fileName,

@@ -1,0 +1,18 @@
+root = true
+
+[*]
+insert_final_newline = true
+end_of_line = crlf
+
+[*.cs]
+indent_style = space
+indent_size = 4
+
+[*.{js,html}]
+indent_style = space
+indent_size = 2
+
+#Formatting - organize using options
+
+#sort System.* using directives alphabetically, and place them before other usings
+dotnet_sort_system_directives_first = true

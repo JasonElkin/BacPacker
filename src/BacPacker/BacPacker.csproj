@@ -2,11 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SqlServer.DacFx" Version="150.4897.1" />
     <PackageReference Include="UmbracoCms.Web" Version="8.1.0" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /S /H /Y /I /f &quot;$(ProjectDir)Web\UI\*.*&quot; &quot;$(ProjectDir)..\Website\&quot;" />
+  </Target>
 
 </Project>

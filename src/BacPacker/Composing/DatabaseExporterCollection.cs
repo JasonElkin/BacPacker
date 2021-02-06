@@ -13,6 +13,6 @@ namespace BacPacker.Composing
         { }
 
         public IEnumerable<IDatabaseExporter> GetCompatibleExporters(DatabaseType databaseType)
-            => this.Where(x => x.SupportsDatabase(databaseType.GetProviderName()));
+            => this.Where(x => x.SupportsDatabase(databaseType));
     }
 }

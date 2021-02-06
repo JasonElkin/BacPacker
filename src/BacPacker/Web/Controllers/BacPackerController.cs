@@ -4,11 +4,11 @@ using Umbraco.Web.WebApi;
 
 namespace BacPacker.Web.Controllers
 {
-    public class DatabaseExportController : UmbracoAuthorizedApiController
+    public class BacPackerController : UmbracoAuthorizedApiController
     {
         private readonly ExportService exportService;
 
-        public DatabaseExportController(ExportService exportService)
+        public BacPackerController(ExportService exportService)
         {
             this.exportService = exportService;
         }

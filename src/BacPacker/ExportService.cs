@@ -54,16 +54,15 @@ namespace BacPacker
 
                 var filePath = Path.Combine(
                     exportBasePath,
+                    exporter.Id.ToString(),
                     DateTime.UtcNow.ToString(Constants.ExportDateFormat)
                     );
 
                 Directory.CreateDirectory(filePath);
 
-                var fileName = Path.Combine(filePath, Path.GetRandomFileName());
-
                 logger.Info(this.GetType(), "Exporting database with exporter {exporter}", exporter);
 
-                var exportPath = await exporter.ExportDatabase(fileName, databaseFactory, reportTo, cts.Token);
+                var exportPath = await exporter.ExportDatabase(filePath, databaseFactory, reportTo, cts.Token);
 
                 logger.Info(this.GetType(), "Finished exporting database to exporter {exportPath}", exportPath);
             });

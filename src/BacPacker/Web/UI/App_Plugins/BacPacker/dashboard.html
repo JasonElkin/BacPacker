@@ -1,1 +1,9 @@
-﻿
+﻿<div ng-controller="BacPacker.DashboardController as vm">
+  <umb-loader ng-if="vm.loading"></umb-loader>
+  <umb-box ng-if="!vm.loading">
+    <umb-box-content>
+      <h3 class="bold">Database Export</h3>
+      {{vm.exporters | json}}
+    </umb-box-content>
+  </umb-box>
+</div>
